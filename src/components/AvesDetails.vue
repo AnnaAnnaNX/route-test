@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div style="background: grey; height: 80vh; min-width: 45vw;">
     Aves Details
+    <router-link to="/aves-details">aves details</router-link>
   </div>
 </template>
 

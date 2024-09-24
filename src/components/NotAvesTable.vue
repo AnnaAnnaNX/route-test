@@ -1,17 +1,30 @@
 <template>
-  <div>
-    Not Aves Table
-    <router-link to="/aves-table/not-aves-details">Not aves details</router-link>
+  <div style="display: flex;">
+    <div :style="`height: 80vh; min-width: ${childPath ? 50 : 100}%; background: pink;`">
+      Not Aves Table
+      <router-link to="/not-aves-table/not-aves-details">Not aves details</router-link>
+    </div>
+    <div style="height: 80vh;">
+      <router-view/>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router';
+const route = useRoute()
+
+const childPath = computed(() => {
+  if (!route.name || !route.name.includes('Child')) {
+    return null;
   }
-}
+  console.log('route?.matched?.children', route?.matched)
+  for(let val of route?.matched?.[0]?.children || []) {
+    if (val.name === route.name) return '/' + val.path;
+  }
+  return null;
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
